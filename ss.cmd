@@ -7,5 +7,4 @@ if not exist "%NGROK_PATH%" (
     exit /b
 )
 
-start "" "%NGROK_PATH%" http 4444 --subdomain=amused-learning-griffon
-pause
+"%NGROK_PATH%" http --url=amused-learning-griffon.ngrok-free.app 4444
