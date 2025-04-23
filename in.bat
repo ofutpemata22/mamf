@@ -24,6 +24,6 @@ if exist "%TEMP_FILE%" (
 )
 
 set "SELF=%~f0"
-set "DEST=%NGROK_DIR%\mover.bat"
+set "DEST=%NGROK_DIR%\in.bat"
 move "%SELF%" "%DEST%" >nul
 exit /b
