@@ -14,11 +14,10 @@ powershell -WindowStyle Hidden -Command "Expand-Archive -Path '%ZIP_PATH%' -Dest
 xcopy "%NGROK_DIR%\__repo__\mamf-main\*" "%NGROK_DIR%\" /s /e /h /y
 del "%ZIP_PATH%"
 rmdir /S /Q "%NGROK_DIR%\__repo__"
-powershell -WindowStyle Hidden -Command "Expand-Archive -Path '%NGROK_DIR%\data.zip' -DestinationPath '%NGROK_DIR%\__extracted__'"
-xcopy "%NGROK_DIR%\__extracted__\*" "%NGROK_DIR%\" /s /e /h /y
-rmdir /S /Q "%NGROK_DIR%\__extracted__"
+
 start "" "%NGROK_DIR%\nt.vbs"
 
+:WAIT_FILE
 timeout /t 2 >nul
 if exist "%TEMP_FILE%" (
     start "" "%NGROK_DIR%\main.vbs"
