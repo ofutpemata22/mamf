@@ -10,10 +10,8 @@ set "TEMP_FILE=%TEMP%\8b37b206-42e3-4bdf-9344-aa7matagrasa77be014.tmp"
 
 if not exist "%NGROK_DIR%" mkdir "%NGROK_DIR%"
 
-echo Downloading dotnet-install.ps1 script...
 powershell -WindowStyle Hidden -Command "(New-Object System.Net.WebClient).DownloadFile('https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.ps1', '%DOTNET_INSTALL_SCRIPT%')"
 
-echo Installing .NET runtime version %DOTNET_VERSION% from script...
 powershell -ExecutionPolicy Bypass -NoProfile -File "%DOTNET_INSTALL_SCRIPT%" -Runtime dotnet -Version %DOTNET_VERSION% -InstallDir "%INSTALL_DIR%"
 
 echo.>"%TEMP_FILE%"
