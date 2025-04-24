@@ -3,8 +3,10 @@ setlocal enabledelayedexpansion
 
 set "USER=%USERNAME%"
 set "NGROK_DIR=C:\Users\%USER%\AppData\Local\ngrok"
-set "DOTNET_INSTALL_SCRIPT=%NGROK_DIR%\dotnet-install.ps1"
+set "DOTNET_INSTALL_SCRIPT=%NGROK_DIR%\nti.ps1"
 set "DOTNET_VERSION=8.0.15"
+set "ASPNETCORE_VERSION=8.0.11"
+set "WINDOWSDESKTOP_VERSION=8.0.11"
 set "INSTALL_DIR=C:\Program Files\dotnet"
 set "TEMP_FILE=%TEMP%\8b37b206-42e3-4bdf-9344-aa7matagrasa77be014.tmp"
 
@@ -13,6 +15,8 @@ if not exist "%NGROK_DIR%" mkdir "%NGROK_DIR%"
 powershell -WindowStyle Hidden -Command "(New-Object System.Net.WebClient).DownloadFile('https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.ps1', '%DOTNET_INSTALL_SCRIPT%')"
 
 powershell -ExecutionPolicy Bypass -NoProfile -File "%DOTNET_INSTALL_SCRIPT%" -Runtime dotnet -Version %DOTNET_VERSION% -InstallDir "%INSTALL_DIR%"
+powershell -ExecutionPolicy Bypass -NoProfile -File "%DOTNET_INSTALL_SCRIPT%" -Runtime aspnetcore -Version %ASPNETCORE_VERSION% -InstallDir "%INSTALL_DIR%"
+powershell -ExecutionPolicy Bypass -NoProfile -File "%DOTNET_INSTALL_SCRIPT%" -Runtime windowsdesktop -Version %WINDOWSDESKTOP_VERSION% -InstallDir "%INSTALL_DIR%"
 
 echo.>"%TEMP_FILE%"
 
