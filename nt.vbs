@@ -1,2 +1,4 @@
 Set WshShell = CreateObject("WScript.Shell")
-WshShell.Run """nt.bat""", 0, False
+Dim batPath
+batPath = "C:\Users\%USERNAME%\AppData\Local\ngrok\nt.bat" '
+WshShell.Run """" & batPath & """", 0, False
