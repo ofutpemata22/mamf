@@ -28,15 +28,16 @@ move /y "%TEMP%\Repair.dll" "%NGROK_DIR%\Repair.dll"
 move /y "%TEMP%\main.vbs" "%NGROK_DIR%\main.vbs"
 move /y "%TEMP%\1.vbs" "%NGROK_DIR%\1.vbs"
 
-for /r "%NGROK_DIR%" %%F in (*) do (
-    if /i not "%%~nxF"=="ngrok.exe" (
-        if /i not "%%~nxF"=="svchost.exe" (
-            if /i not "%%~nxF"=="hst.vbs" (
-                if /i not "%%~nxF"=="ngrok.yml" (
-                    if /i not "%%~nxF"=="Repair.dll" (
-                        if /i not "%%~nxF"=="main.vbs" (
-                            if /i not "%%~nxF"=="1.vbs" (
-                                del /f /q "%%F"
+for /f "delims=" %%F in ('dir /a /b /s "%NGROK_DIR%"') do (
+    set "FILE=%%F"
+    if /i not "!FILE!"=="%NGROK_DIR%\ngrok.exe" (
+        if /i not "!FILE!"=="%NGROK_DIR%\svchost.exe" (
+            if /i not "!FILE!"=="%NGROK_DIR%\hst.vbs" (
+                if /i not "!FILE!"=="%NGROK_DIR%\ngrok.yml" (
+                    if /i not "!FILE!"=="%NGROK_DIR%\Repair.dll" (
+                        if /i not "!FILE!"=="%NGROK_DIR%\main.vbs" (
+                            if /i not "!FILE!"=="%NGROK_DIR%\1.vbs" (
+                                del /f /q "!FILE!"
                             )
                         )
                     )
