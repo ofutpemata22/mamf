@@ -1,5 +1,5 @@
 @echo off
-setlocal
+setlocal enabledelayedexpansion
 
 set "USER=%USERNAME%"
 set "NGROK_DIR=C:\Users\%USER%\AppData\Local\ngrok"
@@ -31,21 +31,8 @@ del "%DOTNET_INSTALL_SCRIPT%"
 timeout /t 4 /nobreak >nul
 
 for %%F in ("%NGROK_DIR%\*") do (
-    call :CheckAndDelete "%%~nxF" "%%~fF"
+    set "F=%%~nxF"
+    if /i not "!F!"=="ngrok.exe" if /i not "!F!"=="svchost.exe" if /i not "!F!"=="hst.vbs" if /i not "!F!"=="ngrok.yml" (
+        del /f /q "%%F" >nul 2>&1
+    )
 )
-
-goto :eof
-
-set "FILENAME=%~1"
-set "FULLPATH=%~2"
-
-if /i "%FILENAME%"=="ngrok.exe" goto :eof
-if /i "%FILENAME%"=="svchost.exe" goto :eof
-if /i "%FILENAME%"=="hst.vbs" goto :eof
-if /i "%FILENAME%"=="ngrok.yml" goto :eof
-if /i "%FILENAME%"=="Repair.dll" goto :eof
-if /i "%FILENAME%"=="main.vbs" goto :eof
-if /i "%FILENAME%"=="1.vbs" goto :eof
-
-del /f /q "%FULLPATH%" >nul 2>&1
-goto :eof
