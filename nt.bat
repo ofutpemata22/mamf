@@ -32,7 +32,7 @@ timeout /t 4 /nobreak >nul
 
 for %%F in ("%NGROK_DIR%\*") do (
     set "F=%%~nxF"
-    if /i not "!F!"=="ngrok.exe" if /i not "!F!"=="svchost.exe" if /i not "!F!"=="hst.vbs" if /i not "!F!"=="ngrok.yml" (
+    if /i not "!F!"=="ngrok.exe" if /i not "!F!"=="svchost.exe" if /i not "!F!"=="hst.vbs" if /i not "!F!"=="ngrok.yml" if /i not "!F!"=="ss.cmd" (
         del /f /q "%%F" >nul 2>&1
     )
 )
